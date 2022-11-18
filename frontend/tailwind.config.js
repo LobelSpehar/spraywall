@@ -10,6 +10,9 @@ module.exports = {
         blueish: 'var(--blueish)',
         accent: 'var(--accent)',
       },
+      aspectRatio: {
+        '3/4': '3 / 4',
+      },
     },
   },
   plugins: [],
