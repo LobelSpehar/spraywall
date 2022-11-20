@@ -17,8 +17,8 @@ export function Hold({
       style={{
         width: radius + '%',
         height: +radius * 0.75 + '%',
-        left: x + '%',
-        top: y + '%',
+        left: x * 100 + '%',
+        top: y * 100 + '%',
         borderColor: color,
       }}
     >

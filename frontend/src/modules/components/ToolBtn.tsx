@@ -6,23 +6,29 @@ export function ToolBtn({
   icon,
   title,
   disabled,
+  text,
+  borderColor,
 }: {
   onClickHandler: Function;
-  value: string | HoldType[];
+  value: string | HoldType[] | number;
   icon?: string;
   title: string;
   disabled?: boolean;
+  text?: string;
+  borderColor?: string;
 }) {
   return (
     <button
-      className='w-8 h-8 bg-no-repeat bg-origin-content bg-contain bg-secondary border-2 border-b-4 rounded p-1 border-primary disabled:border-red-600'
+      className='w-10 h-10 bg-no-repeat bg-origin-content bg-contain text-center bg-secondary border-black border rounded p-1'
       style={{
         backgroundImage: icon ? `url(${icon})` : '',
-        borderBottomColor: typeof value === 'string' ? value : '',
+        borderColor: borderColor,
       }}
       onClick={(e) => onClickHandler(value)}
       disabled={disabled}
       title={title}
-    ></button>
+    >
+      <p className='font-bold'>{text}</p>
+    </button>
   );
 }

@@ -1,1 +1,2 @@
-export * from 'modules/types/HoldType';
+export * from 'modules/types/holdType';
+export * from 'modules/types/routeType';
