@@ -9,16 +9,16 @@ export function Home() {
   const { fetchRoutes } = useRoutesList();
   const [page, setPage] = useState(0);
   const [asc, setAsc] = useState(true);
-  const [minGrade, setMinGrade] = useState('3');
-  const [maxGrade, setMaxGrade] = useState('9A');
+  const [minGrade, setMinGrade] = useState(0);
+  const [maxGrade, setMaxGrade] = useState(gradesRange.length);
   useEffect(() => {
     let min = localStorage.getItem('minGrade');
     let max = localStorage.getItem('maxGrade');
     if (min !== null) {
-      setMinGrade(min);
+      setMinGrade(+min);
     }
     if (max !== null) {
-      setMaxGrade(max);
+      setMaxGrade(+max);
     }
     let res = fetchRoutes('date', 1, true, minGrade, maxGrade);
     setRoutes(res);
@@ -30,18 +30,15 @@ export function Home() {
         <select
           value={minGrade}
           onChange={(e) => {
-            setMinGrade(e.target.value);
+            setMinGrade(+e.target.value);
             localStorage.setItem('minGrade', e.target.value);
           }}
           className='bg-secondary rounded text-center mx-2'
         >
-          <option hidden value={'Grade'}>
-            Grade
-          </option>
           {gradesRange
-            .filter((grade) => grade < maxGrade)
+            .filter((grade, index) => index < maxGrade)
             .map((grade) => (
-              <option key={grade} value={grade}>
+              <option key={grade} value={gradesRange.indexOf(grade)}>
                 {grade}
               </option>
             ))}
@@ -49,18 +46,15 @@ export function Home() {
         <select
           value={maxGrade}
           onChange={(e) => {
-            setMaxGrade(e.target.value);
+            setMaxGrade(+e.target.value);
             localStorage.setItem('maxGrade', e.target.value);
           }}
           className='bg-secondary rounded text-center mx-2'
         >
-          <option hidden value={'Grade'}>
-            Grade
-          </option>
           {gradesRange
-            .filter((grade) => grade > minGrade)
+            .filter((grade, index) => index > minGrade)
             .map((grade) => (
-              <option key={grade} value={grade}>
+              <option key={grade} value={gradesRange.indexOf(grade)}>
                 {grade}
               </option>
             ))}
@@ -115,7 +109,7 @@ export function Home() {
               onClick={(e) => navigate(`/route/${item.id}`)}
             >
               <td>{item.name}</td>
-              <td>{item.setGrade}</td>
+              <td>{gradesRange[item.setGrade]}</td>
               <td>{item.setter}</td>
               <td>{item.dateSet}</td>
             </tr>

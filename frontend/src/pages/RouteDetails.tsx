@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom';
 import { useRoutesList } from 'modules/hooks/useRoutesList';
 
 import { HoldType } from 'modules/types';
-import wall from 'assets/images/spraywall.jpg';
-import { RouteImage } from 'modules/components/RouteImage';
+
+import { HoldsContainer } from 'modules/components/routeImage/HoldsContainer';
+import { RouteImage } from 'modules/components/routeImage/RouteImage';
 
 export function RouteDetails() {
   const [holdsList, setHoldsList] = useState<HoldType[]>([]);
@@ -18,13 +19,8 @@ export function RouteDetails() {
   }, []);
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(${wall})`,
-      }}
-      className='aspect-[3/4] bg-contain bg-no-repeat mx-auto overflow-hidden max-w-full h-[125vw] lg:max-h-[calc(100vh-80px)] mb-2'
-    >
-      <RouteImage route={holdsList} />
-    </div>
+    <RouteImage>
+      <HoldsContainer route={holdsList} />
+    </RouteImage>
   );
 }

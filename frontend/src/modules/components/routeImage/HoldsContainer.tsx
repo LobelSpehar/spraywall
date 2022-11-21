@@ -1,14 +1,13 @@
-import { Hold } from 'modules/components/Hold';
+import DelHoldBtn from 'modules/components/routeImage/DelHoldBtn';
+import { Hold } from 'modules/components/routeImage/Hold';
 import { HoldType } from 'modules/types';
 
-export function RouteImage({
+export function HoldsContainer({
   route,
-  children,
   onDelHold,
   step,
 }: {
   route: HoldType[];
-  children?: JSX.Element | JSX.Element[];
   onDelHold?: Function;
   step?: number;
 }) {
@@ -23,18 +22,10 @@ export function RouteImage({
           color={item.color}
         >
           {onDelHold && (
-            <button
-              onClick={(e) => {
-                if (step) {
-                  onDelHold(item.id);
-                }
-              }}
-              className='w-full h-full'
-            ></button>
+            <DelHoldBtn step={step} onDelHold={onDelHold} value={item.id} />
           )}
         </Hold>
       ))}
-      {children}
     </ul>
   );
 }

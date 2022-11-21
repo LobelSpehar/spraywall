@@ -3,5 +3,5 @@ export interface HoldType {
   y: number;
   radius: number;
   color: string;
-  id: string;
+  id: number;
 }

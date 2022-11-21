@@ -10,7 +10,7 @@ export function ToolBtn({
   borderColor,
 }: {
   onClickHandler: Function;
-  value: string | HoldType[] | number;
+  value?: string | HoldType[] | number;
   icon?: string;
   title: string;
   disabled?: boolean;

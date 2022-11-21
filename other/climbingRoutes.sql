@@ -1,7 +1,7 @@
-drop database if exists gym;;
+drop database if exists climbinggym;;
 
-create database gym;
-use gym;
+create database climbinggym;
+use climbinggym;
 
 
 
@@ -18,7 +18,7 @@ create table route(
     wall int,
     setter int,
     name varchar(50),
-    grade varchar(3),
+    setgrade int(2), 
     dateSet datetime
 );
 
@@ -40,7 +40,7 @@ create table user(
 create table climbedroute(
     user int,
     route int,
-    grade varchar(3),
+    grade int(2),
     date datetime,
     isfavourite boolean
 );

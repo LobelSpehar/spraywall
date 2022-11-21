@@ -8,12 +8,11 @@ export function useRoutesList() {
   const [routeList, setRouteList] = useRecoilState(gymAtom);
   const saveNewRoute = (
     route: HoldType[],
-    grade: string,
+    grade: number,
     setter: string,
     name: string
   ) => {
     let date = new Date();
-    console.log(route);
     setRouteList((current) => [
       ...current,
       {
@@ -33,8 +32,8 @@ export function useRoutesList() {
     sortBy: string,
     page: number,
     sortAsc: boolean,
-    minGrade: string,
-    maxGrade: string
+    minGrade: number,
+    maxGrade: number
   ) => {
     let rawResult = sortAsc
       ? collect(routeList).sortBy(sortBy)
