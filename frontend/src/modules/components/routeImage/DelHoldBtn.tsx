@@ -1,6 +1,4 @@
-import React from 'react';
-
-function DelHoldBtn({
+export function DelHoldBtn({
   step,
   onDelHold,
   value,
@@ -20,5 +18,3 @@ function DelHoldBtn({
     ></button>
   );
 }
-
-export default DelHoldBtn;

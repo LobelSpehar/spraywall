@@ -10,7 +10,7 @@ export function RouteImage({
       style={{
         backgroundImage: `url(${wall})`,
       }}
-      className='aspect-[3/4] bg-contain bg-no-repeat mx-auto max-w-full h-[125vw] lg:max-h-[calc(100vh-80px)] mb-2'
+      className='aspect-[3/4] bg-contain bg-no-repeat mx-auto max-w-full h-[110vw] lg:max-h-[calc(100vh-160px)]'
     >
       {children}
     </div>

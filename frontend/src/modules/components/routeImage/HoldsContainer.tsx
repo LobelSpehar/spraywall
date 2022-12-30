@@ -1,4 +1,4 @@
-import DelHoldBtn from 'modules/components/routeImage/DelHoldBtn';
+import { DelHoldBtn } from 'modules/components/routeImage/DelHoldBtn';
 import { Hold } from 'modules/components/routeImage/Hold';
 import { HoldType } from 'modules/types';
 
@@ -12,7 +12,7 @@ export function HoldsContainer({
   step?: number;
 }) {
   return (
-    <ul className='h-full w-full relative top-0'>
+    <ul className='h-full w-full relative top-0 overflow-hidden'>
       {route.map((item: HoldType) => (
         <Hold
           key={item.id}

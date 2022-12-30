@@ -11,8 +11,8 @@ input:focus {
 .root,
 #root,
 #docs-root {
-  --primary: #30323d;
-  --secondary: #4d5061;
+  --primary: #ffffff;
+  --secondary: #f8f4e3;
   --pale: #cdd1c4;
   --blueish: #5c80bc;
   --accent: #e8c547;

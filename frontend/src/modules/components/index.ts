@@ -9,4 +9,3 @@ export * from './routeEditor/ClickableArea';
 export * from './routeImage/RouteImage';
 export * from './routeEditor/EditToolbar';
 export * from './routeEditor/SaveToolbar';
-export * from './navBar/MenuBtn';

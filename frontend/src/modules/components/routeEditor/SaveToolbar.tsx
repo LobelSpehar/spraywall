@@ -1,12 +1,13 @@
-import { back, save } from 'assets/svg';
-import { ToolBar } from 'modules/components/toolBar/ToolBar';
-import { ToolBarRow } from 'modules/components/toolBar/ToolBarRow';
-import { ToolBtn } from 'modules/components/toolBar/ToolBtn';
-import { gradesRange } from 'modules/consts/gradesRange';
-import { useRoutesList } from 'modules/hooks/useRoutesList';
-import { HoldType } from 'modules/types';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { back, save } from 'assets/svg';
+import { ToolBar, ToolBarRow, ToolBtn } from 'modules/components';
+
+import { gradesRange } from 'modules/consts/gradesRange';
+import { useFirestore } from 'modules/hooks';
+import { HoldType } from 'modules/types';
+import { User } from 'firebase/auth';
 
 export function SaveToolbar({
   setStep,
@@ -15,15 +16,21 @@ export function SaveToolbar({
 }: {
   setStep: Function;
   route: HoldType[];
-  user: string;
+  user: User | null;
 }) {
+  const { onAddRoute } = useFirestore();
+
   const [routeGrade, setRouteGrade] = useState<number>(-1);
   const [routeName, setRouteName] = useState('');
-  const { saveNewRoute } = useRoutesList();
   const navigate = useNavigate();
-  const onSaveHandler = () => {
-    saveNewRoute(route, routeGrade, user, routeName);
-    navigate('/home');
+  const onSaveHandler = async () => {
+    await onAddRoute({
+      route: route,
+      grade: routeGrade,
+      setter: user?.displayName || '',
+      name: routeName,
+    });
+    navigate('/');
   };
   return (
     <ToolBar>

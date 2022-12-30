@@ -9,4 +9,25 @@ import home from 'assets/svg/menu/home.svg';
 import add from 'assets/svg/menu/add.svg';
 import fav from 'assets/svg/menu/fav.svg';
 import back from 'assets/svg/menu/back.svg';
-export { foot, hand, start, top, save, undo, user, home, add, fav, back };
+import loginSvg from 'assets/svg/auth/loginSvg.svg';
+import registerSvg from 'assets/svg/auth/registerSvg.svg';
+import forgotSvg from 'assets/svg/auth/forgotSvg.svg';
+import welcome from 'assets/svg/welcome.svg';
+
+export {
+  foot,
+  hand,
+  start,
+  top,
+  save,
+  undo,
+  user,
+  home,
+  add,
+  fav,
+  back,
+  loginSvg,
+  registerSvg,
+  forgotSvg,
+  welcome,
+};

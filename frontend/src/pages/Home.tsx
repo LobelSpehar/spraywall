@@ -1,16 +1,24 @@
-import { useRoutesList } from 'modules/hooks/useRoutesList';
 import { RouteType } from 'modules/types';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { gradesRange } from 'modules/consts/gradesRange';
+import { GradeRangeSelect } from 'modules/components/home/GradeRangeSelect';
+import { RoutesList } from 'modules/components/home/RoutesList';
+import { Paging } from 'modules/components/home/Paging';
+import { useFirestore } from 'modules/hooks';
+import { useRecoilValue } from 'recoil';
+import { gymAtom } from 'recoil/atoms/gymAtom';
+
 export function Home() {
-  const [routes, setRoutes] = useState<RouteType[]>([]);
+  const routes = useRecoilValue(gymAtom);
+  const { fetchRoutes } = useFirestore();
   const navigate = useNavigate();
-  const { fetchRoutes } = useRoutesList();
+
   const [page, setPage] = useState(0);
   const [asc, setAsc] = useState(true);
   const [minGrade, setMinGrade] = useState(0);
   const [maxGrade, setMaxGrade] = useState(gradesRange.length);
+
   useEffect(() => {
     let min = localStorage.getItem('minGrade');
     let max = localStorage.getItem('maxGrade');
@@ -20,102 +28,38 @@ export function Home() {
     if (max !== null) {
       setMaxGrade(+max);
     }
-    let res = fetchRoutes('date', 1, true, minGrade, maxGrade);
-    setRoutes(res);
+    fetchRoutes();
   }, [minGrade, maxGrade]);
 
   return (
-    <section className='overflow-none h-full w-full'>
-      <div className='mx-auto w-fit'>
-        <select
-          value={minGrade}
-          onChange={(e) => {
-            setMinGrade(+e.target.value);
-            localStorage.setItem('minGrade', e.target.value);
-          }}
-          className='bg-secondary rounded text-center mx-2'
-        >
-          {gradesRange
-            .filter((grade, index) => index < maxGrade)
-            .map((grade) => (
-              <option key={grade} value={gradesRange.indexOf(grade)}>
-                {grade}
-              </option>
-            ))}
-        </select>
-        <select
-          value={maxGrade}
-          onChange={(e) => {
-            setMaxGrade(+e.target.value);
-            localStorage.setItem('maxGrade', e.target.value);
-          }}
-          className='bg-secondary rounded text-center mx-2'
-        >
-          {gradesRange
-            .filter((grade, index) => index > minGrade)
-            .map((grade) => (
-              <option key={grade} value={gradesRange.indexOf(grade)}>
-                {grade}
-              </option>
-            ))}
-        </select>
-      </div>
-      <table className='w-fit mx-auto select-none hover:cursor-pointer'>
-        <thead>
-          <tr className='h-10'>
-            <th
-              onClick={(e) => {
-                setRoutes(fetchRoutes('name', page, asc, minGrade, maxGrade));
-                setAsc(!asc);
-              }}
-            >
-              Name:
-            </th>
-            <th
-              onClick={(e) => {
-                setRoutes(
-                  fetchRoutes('setGrade', page, asc, minGrade, maxGrade)
-                );
-                setAsc(!asc);
-              }}
-            >
-              Grade:
-            </th>
-            <th
-              onClick={(e) => {
-                setRoutes(fetchRoutes('setter', page, asc, minGrade, maxGrade));
-                setAsc(!asc);
-              }}
-            >
-              Setter:
-            </th>
-            <th
-              onClick={(e) => {
-                setRoutes(
-                  fetchRoutes('dateSet', page, asc, minGrade, maxGrade)
-                );
-                setAsc(!asc);
-              }}
-            >
-              Date:
-            </th>
+    <section className='h-full w-full'>
+      <GradeRangeSelect
+        minGrade={minGrade}
+        gradesRange={gradesRange}
+        maxGrade={maxGrade}
+        setMaxGrade={setMaxGrade}
+        setMinGrade={setMinGrade}
+      />
+
+      <RoutesList>
+        {routes.map((route) => (
+          <tr key={route.id} className='bg-gray-100 border-b'>
+            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+              <Link to={'/route/' + route.id}>{route.name}</Link>
+            </td>
+            <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
+              {gradesRange[route.grade]}
+            </td>
+            <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
+              {route.setter}
+            </td>
+            <td className='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>
+              {route.date}
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {routes.map((item) => (
-            <tr
-              key={item.id}
-              className='h-8 text-center bg-secondary border-2 border-primary'
-              onClick={(e) => navigate(`/route/${item.id}`)}
-            >
-              <td>{item.name}</td>
-              <td>{gradesRange[item.setGrade]}</td>
-              <td>{item.setter}</td>
-              <td>{item.dateSet}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        ))}
+      </RoutesList>
+      <Paging />
     </section>
   );
 }

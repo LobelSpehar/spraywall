@@ -8,8 +8,9 @@ import {
   ClickableArea,
   HoldsContainer,
 } from 'modules/components';
+import { User } from 'firebase/auth';
 
-export function RouteEditor() {
+export function RouteEditor({ user }: { user: User | null }) {
   const [holdsList, setHoldList] = useState<HoldType[] | []>([]);
   const [holdRadius, setHoldRadius] = useState<number>(10);
   const [holdColor, setHoldColor] = useState<string>('#9ADF00');
@@ -47,7 +48,7 @@ export function RouteEditor() {
   };
 
   return (
-    <section className='bg-primary overflow-auto h-full'>
+    <section className='bg-gray-900 h-full pt-2'>
       {step ? (
         <EditToolbar
           setHoldColor={setHoldColor}
@@ -59,7 +60,7 @@ export function RouteEditor() {
           holdsListLen={holdsList.length}
         />
       ) : (
-        <SaveToolbar setStep={setStep} route={holdsList} user={'addUsername'} />
+        <SaveToolbar setStep={setStep} route={holdsList} user={user} />
       )}
       <RouteImage>
         <HoldsContainer route={holdsList} onDelHold={delHold} step={step} />
