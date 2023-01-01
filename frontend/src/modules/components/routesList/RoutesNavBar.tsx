@@ -1,28 +1,30 @@
-export function GradeRangeSelect({
+export function RoutesNavBar({
   minGrade,
-  gradesRange,
   maxGrade,
-  setMaxGrade,
   setMinGrade,
+  setMaxGrade,
+  gradesRange,
 }: {
   minGrade: number;
-  gradesRange: Array<string>;
   maxGrade: number;
-  setMaxGrade: Function;
   setMinGrade: Function;
+  setMaxGrade: Function;
+  gradesRange: Array<string>;
 }) {
   return (
-    <div className='mx-auto w-fit p-4'>
+    <div className='flex justify-center mx-4 mb-2'>
       <select
         value={minGrade}
         onChange={(e) => {
           setMinGrade(+e.target.value);
           localStorage.setItem('minGrade', e.target.value);
         }}
-        className='bg-secondary rounded text-center mx-2'
+        className='bg-indigo-100 text-indigo-500 rounded-full px-2 text-center mr-2'
       >
         {gradesRange
-          .filter((grade: string, index: number) => index < maxGrade)
+          .filter(
+            (grade: string, index: number) => index < maxGrade && grade !== 'x'
+          )
           .map((grade: string) => (
             <option key={grade} value={gradesRange.indexOf(grade)}>
               {grade}
@@ -35,7 +37,7 @@ export function GradeRangeSelect({
           setMaxGrade(+e.target.value);
           localStorage.setItem('maxGrade', e.target.value);
         }}
-        className='bg-secondary rounded text-center mx-2'
+        className='bg-indigo-100 text-indigo-500 rounded-full px-2 text-center'
       >
         {gradesRange
           .filter((grade: string, index: number) => index > minGrade)

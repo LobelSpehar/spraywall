@@ -9,6 +9,7 @@ import {
   HoldsContainer,
 } from 'modules/components';
 import { User } from 'firebase/auth';
+import { explore } from 'assets/svg';
 
 export function RouteEditor({ user }: { user: User | null }) {
   const [holdsList, setHoldList] = useState<HoldType[] | []>([]);
@@ -48,7 +49,10 @@ export function RouteEditor({ user }: { user: User | null }) {
   };
 
   return (
-    <section className='bg-gray-900 h-full pt-2'>
+    <section
+      className='h-full pt-2 bg-no-repeat bg-cover bg-center'
+      style={{ backgroundImage: `url(${explore})` }}
+    >
       {step ? (
         <EditToolbar
           setHoldColor={setHoldColor}

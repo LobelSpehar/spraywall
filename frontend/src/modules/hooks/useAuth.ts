@@ -11,7 +11,10 @@ import {
 } from 'firebase/auth';
 import { auth } from 'firebaseInit';
 
+import { useNotifications } from 'modules/hooks/useNotifications';
+
 export function useAuth() {
+  const { errorMsg, infoMsg } = useNotifications();
   const navigate = useNavigate();
 
   const onRegister = async (
@@ -32,12 +35,10 @@ export function useAuth() {
       );
       const user = await userCredential.user;
       await updateProfile(user, { displayName: username });
-
+      infoMsg('Success, Welcome ' + username + '!');
       navigate('/');
     } catch (error: any) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage);
+      errorMsg(error.message);
     }
   };
 
@@ -58,31 +59,27 @@ export function useAuth() {
       );
       const user = await userCredential.user;
       navigate('/');
+      infoMsg('Welcome back ' + user.displayName + '!');
     } catch (error: any) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage);
+      errorMsg(error.message);
     }
   };
   const onLogOut = async () => {
     try {
       const userCredential = await signOut(auth);
       navigate('/');
+      infoMsg('Logged out, bye!');
     } catch (error: any) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage);
+      errorMsg(error.message);
     }
   };
   const onReset = async (userEmail: string) => {
     try {
       const userCredential = await sendPasswordResetEmail(auth, userEmail);
-      alert('Email sent to ' + userEmail);
       navigate('/login');
+      infoMsg('Email sent to ' + userEmail);
     } catch (error: any) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage);
+      errorMsg(error.message);
     }
   };
 

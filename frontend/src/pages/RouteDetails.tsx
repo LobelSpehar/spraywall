@@ -22,10 +22,10 @@ export function RouteDetails() {
   }, []);
 
   return (
-    <div className='mt-10'>
+    <section className='mt-10'>
       <RouteImage>
         <HoldsContainer route={holdsList} />
       </RouteImage>
-    </div>
+    </section>
   );
 }

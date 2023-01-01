@@ -53,10 +53,17 @@ export function NavBar({ user }: { user: User | null }) {
           </Link>
           <Link
             onClick={(e) => setMenu(false)}
-            to={'/'}
+            to={'/myprofile'}
             className=' hover:text-white m-1'
           >
             My Profile
+          </Link>
+          <Link
+            onClick={(e) => setMenu(false)}
+            to={'/favourites'}
+            className=' hover:text-white m-1'
+          >
+            Favourites
           </Link>
         </nav>
         {user ? (

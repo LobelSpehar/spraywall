@@ -25,29 +25,29 @@ export function EditToolbar({
       <ToolBarRow>
         <ToolBtn
           onClickHandler={setHoldColor}
+          current={holdColor}
           value={'#9ADF00'}
-          borderColor={holdColor === '#9ADF00' ? '#9ADF00' : ''}
           title={'start'}
           icon={start}
         />
         <ToolBtn
           onClickHandler={setHoldColor}
+          current={holdColor}
           value={'#009287'}
-          borderColor={holdColor === '#009287' ? '#009287' : ''}
           title={'hand'}
           icon={hand}
         />
         <ToolBtn
           onClickHandler={setHoldColor}
+          current={holdColor}
           value={'#270722'}
-          borderColor={holdColor === '#270722' ? '#270722' : ''}
           title={'foot'}
           icon={foot}
         />
         <ToolBtn
           onClickHandler={setHoldColor}
+          current={holdColor}
           value={'#EA000C'}
-          borderColor={holdColor === '#EA000C' ? '#EA000C' : ''}
           title={'top'}
           icon={top}
         />
@@ -55,7 +55,6 @@ export function EditToolbar({
           onClickHandler={setStep}
           value={0}
           disabled={holdsListLen < 3}
-          borderColor={holdsListLen < 3 ? 'red' : ''}
           title={'save'}
           icon={save}
         />
@@ -63,29 +62,29 @@ export function EditToolbar({
       <ToolBarRow>
         <ToolBtn
           onClickHandler={setHoldRadius}
+          current={holdRadius}
           value={8}
-          borderColor={holdRadius === 8 ? '#9ADF00' : ''}
           text={'S'}
           title={'undo'}
         />
         <ToolBtn
           onClickHandler={setHoldRadius}
+          current={holdRadius}
           value={10}
-          borderColor={holdRadius === 10 ? '#9ADF00' : ''}
           text={'M'}
           title={'undo'}
         />
         <ToolBtn
           onClickHandler={setHoldRadius}
+          current={holdRadius}
           value={12}
-          borderColor={holdRadius === 12 ? '#9ADF00' : ''}
           text={'L'}
           title={'undo'}
         />
         <ToolBtn
           onClickHandler={setHoldRadius}
+          current={holdRadius}
           value={14}
-          borderColor={holdRadius === 14 ? '#9ADF00' : ''}
           text={'XL'}
           title={'undo'}
         />

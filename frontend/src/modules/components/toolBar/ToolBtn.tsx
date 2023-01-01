@@ -2,27 +2,27 @@ import { HoldType } from 'modules/types';
 
 export function ToolBtn({
   onClickHandler,
+  current,
   value,
   icon,
   title,
   disabled,
   text,
-  borderColor,
 }: {
   onClickHandler: Function;
+  current?: string | number;
   value?: string | HoldType[] | number;
   icon?: string;
   title: string;
   disabled?: boolean;
   text?: string;
-  borderColor?: string;
 }) {
   return (
     <button
-      className='w-10 h-10 bg-no-repeat bg-origin-content bg-contain text-center bg-secondary border-black border rounded p-1'
+      className='w-10 h-10 bg-no-repeat bg-origin-content bg-contain text-center bg-gray-100 border border-gray-500 rounded p-1'
       style={{
         backgroundImage: icon ? `url(${icon})` : '',
-        borderColor: borderColor,
+        backgroundColor: current === value ? 'lightgray' : '',
       }}
       onClick={(e) => onClickHandler(value)}
       disabled={disabled}

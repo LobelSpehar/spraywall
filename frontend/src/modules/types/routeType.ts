@@ -1,12 +1,11 @@
 import { HoldType } from 'modules/types/holdType';
 
 export interface RouteType {
-  id: number;
+  id: string;
   name: string;
-  setGrade: number;
-  avgGrade: number;
-  repeats: number;
+  grade: number;
   setter: string;
-  dateSet: string;
+  date: string;
+  user_uid: string;
   route: HoldType[];
 }

@@ -12,7 +12,12 @@ import back from 'assets/svg/menu/back.svg';
 import loginSvg from 'assets/svg/auth/loginSvg.svg';
 import registerSvg from 'assets/svg/auth/registerSvg.svg';
 import forgotSvg from 'assets/svg/auth/forgotSvg.svg';
-import welcome from 'assets/svg/welcome.svg';
+import welcome from 'assets/svg/bg/welcome.svg';
+import walk from 'assets/svg/bg/walk.svg';
+import explore from 'assets/svg/bg/explore.svg';
+import detail from 'assets/svg/bg/detail.svg';
+import profile from 'assets/svg/bg/profile.svg';
+import favourite from 'assets/svg/bg/favourite.svg';
 
 export {
   foot,
@@ -30,4 +35,9 @@ export {
   registerSvg,
   forgotSvg,
   welcome,
+  walk,
+  explore,
+  detail,
+  profile,
+  favourite,
 };

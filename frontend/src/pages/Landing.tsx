@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { welcome } from 'assets/svg';
+
 export function Landing() {
   return (
     <section className='mb-40'>
       <div className='bg-gray-900 relative overflow-hidden bg-no-repeat bg-cover h-[500px]'>
-        <img src={welcome}></img>
+        <img src={welcome} alt='welcome'></img>
       </div>
 
       <div className='container mx-auto px-6 md:px-12 xl:px-32'>

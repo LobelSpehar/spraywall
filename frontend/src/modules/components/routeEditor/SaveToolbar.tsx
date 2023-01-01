@@ -28,6 +28,7 @@ export function SaveToolbar({
       route: route,
       grade: routeGrade,
       setter: user?.displayName || '',
+      user_uid: user?.uid || '',
       name: routeName,
     });
     navigate('/');
@@ -49,7 +50,11 @@ export function SaveToolbar({
             Grade
           </option>
           {gradesRange.map((grade) => (
-            <option key={grade} value={gradesRange.indexOf(grade)}>
+            <option
+              key={grade}
+              hidden={grade === 'x'}
+              value={gradesRange.indexOf(grade)}
+            >
               {grade}
             </option>
           ))}
@@ -57,7 +62,6 @@ export function SaveToolbar({
         <ToolBtn
           onClickHandler={onSaveHandler}
           disabled={routeName === '' || routeGrade < 0}
-          borderColor={routeName === '' || routeGrade < 0 ? 'red' : ''}
           title={'save'}
           icon={save}
         />

@@ -1,4 +1,5 @@
 export const gradesRange = [
+  'x',
   '3',
   '3+',
   '4',

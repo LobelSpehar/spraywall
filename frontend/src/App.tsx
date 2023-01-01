@@ -1,12 +1,23 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
-import { RouteEditor, RouteDetails, Home, Login, Register, Reset } from 'pages';
+import {
+  RouteEditor,
+  RouteDetails,
+  Home,
+  Login,
+  Register,
+  Reset,
+  Profile,
+  Favourites,
+} from 'pages';
 import { auth } from 'firebaseInit';
 
 import { onAuthStateChanged, User } from 'firebase/auth';
 
 import { ProtectedRoute } from 'modules/components/ProtectedRoute';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -24,6 +35,18 @@ function App() {
 
   return (
     <div className='bg-primary w-full h-full duration-500 overflow-hidden'>
+      <ToastContainer
+        position='top-center'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
       <Routes>
         <Route
           path='/'
@@ -53,15 +76,15 @@ function App() {
           path='/favourites'
           element={
             <ProtectedRoute user={user}>
-              <div>favs</div>
+              <Favourites user={user} />
             </ProtectedRoute>
           }
         />
         <Route
-          path='/profile'
+          path='/myprofile'
           element={
             <ProtectedRoute user={user}>
-              <div>myprofile</div>
+              <Profile user={user} />
             </ProtectedRoute>
           }
         />
