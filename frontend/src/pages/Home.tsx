@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { gradesRange } from 'modules/consts/gradesRange';
+
+import { gymAtom } from 'recoil/atoms/gymAtom';
+import { useRecoilValue } from 'recoil';
 
 import { useFirestore } from 'modules/hooks';
-import { useRecoilValue } from 'recoil';
-import { gymAtom } from 'recoil/atoms/gymAtom';
+
+import { gradesRange } from 'modules/consts/gradesRange';
 import { walk } from 'assets/svg';
 
-import { RoutesList } from 'modules/components/routesList/RoutesList';
-import { RoutesNavBar } from 'modules/components/routesList/RoutesNavBar';
-import { RoutesPaging } from 'modules/components/routesList/RoutesPaging';
+import { RoutesList, RoutesNavBar, RoutesPaging } from 'modules/components';
 
 export function Home() {
   const routes = useRecoilValue(gymAtom);
@@ -47,11 +47,7 @@ export function Home() {
           setMaxGrade={setMaxGrade}
           gradesRange={gradesRange}
         />
-        <RoutesList
-          gradesRange={gradesRange}
-          routes={routes}
-          refreshList={refreshList}
-        />
+        <RoutesList gradesRange={gradesRange} routes={routes} />
         <RoutesPaging page={page} setPage={setPage} length={routes.length} />
       </div>
     </section>

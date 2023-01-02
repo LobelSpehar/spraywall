@@ -4,10 +4,6 @@ import start from 'assets/svg/tools/start.svg';
 import top from 'assets/svg/tools/top.svg';
 import save from 'assets/svg/tools/save.svg';
 import undo from 'assets/svg/tools/undo.svg';
-import user from 'assets/svg/menu/user.svg';
-import home from 'assets/svg/menu/home.svg';
-import add from 'assets/svg/menu/add.svg';
-import fav from 'assets/svg/menu/fav.svg';
 import back from 'assets/svg/menu/back.svg';
 import loginSvg from 'assets/svg/auth/loginSvg.svg';
 import registerSvg from 'assets/svg/auth/registerSvg.svg';
@@ -18,6 +14,8 @@ import explore from 'assets/svg/bg/explore.svg';
 import detail from 'assets/svg/bg/detail.svg';
 import profile from 'assets/svg/bg/profile.svg';
 import favourite from 'assets/svg/bg/favourite.svg';
+import heartTrue from 'assets/svg/favourite/heartTrue.svg';
+import heartFalse from 'assets/svg/favourite/heartFalse.svg';
 
 export {
   foot,
@@ -26,10 +24,6 @@ export {
   top,
   save,
   undo,
-  user,
-  home,
-  add,
-  fav,
   back,
   loginSvg,
   registerSvg,
@@ -40,4 +34,6 @@ export {
   detail,
   profile,
   favourite,
+  heartTrue,
+  heartFalse,
 };

@@ -1,6 +1,7 @@
 import { User } from 'firebase/auth';
-import { NavBar } from 'modules/components/navBar/NavBar';
+
 import { Landing } from 'pages/Landing';
+import { NavBar } from 'modules/components';
 
 export const ProtectedRoute = ({
   children,

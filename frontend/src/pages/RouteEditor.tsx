@@ -1,6 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { User } from 'firebase/auth';
+import { DocumentData } from 'firebase/firestore/lite';
 
 import { HoldType } from 'modules/types';
+import { explore } from 'assets/svg';
+import { useFirestore } from 'modules/hooks';
 import {
   SaveToolbar,
   EditToolbar,
@@ -8,14 +14,28 @@ import {
   ClickableArea,
   HoldsContainer,
 } from 'modules/components';
-import { User } from 'firebase/auth';
-import { explore } from 'assets/svg';
 
 export function RouteEditor({ user }: { user: User | null }) {
   const [holdsList, setHoldList] = useState<HoldType[] | []>([]);
   const [holdRadius, setHoldRadius] = useState<number>(10);
   const [holdColor, setHoldColor] = useState<string>('#9ADF00');
   const [step, setStep] = useState(1);
+  const [currentData, setCurrentData] = useState<DocumentData>();
+  const id: string = useParams().id || '';
+  const { fetchRouteByID } = useFirestore();
+
+  const fetchRoute = async () => {
+    let res = await fetchRouteByID(id);
+    if (res) {
+      setHoldList(res.route);
+      setCurrentData(res);
+    }
+  };
+  useEffect(() => {
+    if (id) {
+      fetchRoute();
+    }
+  }, []);
 
   const addHold = (e: React.MouseEvent<Element, MouseEvent>) => {
     const node = e.target as HTMLElement;
@@ -64,7 +84,13 @@ export function RouteEditor({ user }: { user: User | null }) {
           holdsListLen={holdsList.length}
         />
       ) : (
-        <SaveToolbar setStep={setStep} route={holdsList} user={user} />
+        <SaveToolbar
+          setStep={setStep}
+          route={holdsList}
+          user={user}
+          id={id}
+          currentData={currentData}
+        />
       )}
       <RouteImage>
         <HoldsContainer route={holdsList} onDelHold={delHold} step={step} />

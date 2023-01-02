@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth } from 'firebaseInit';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { ProtectedRoute } from 'modules/components';
 import {
   RouteEditor,
   RouteDetails,
@@ -11,13 +18,6 @@ import {
   Profile,
   Favourites,
 } from 'pages';
-import { auth } from 'firebaseInit';
-
-import { onAuthStateChanged, User } from 'firebase/auth';
-
-import { ProtectedRoute } from 'modules/components/ProtectedRoute';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -34,7 +34,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div className='bg-primary w-full h-full duration-500 overflow-hidden'>
+    <div className='w-full h-full duration-500 overflow-hidden'>
       <ToastContainer
         position='top-center'
         autoClose={5000}
@@ -58,6 +58,14 @@ function App() {
         ></Route>
         <Route
           path='/routeeditor'
+          element={
+            <ProtectedRoute user={user}>
+              <RouteEditor user={user} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/routeeditor/:id'
           element={
             <ProtectedRoute user={user}>
               <RouteEditor user={user} />

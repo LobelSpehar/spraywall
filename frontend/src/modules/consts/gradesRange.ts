@@ -26,3 +26,4 @@ export const gradesRange = [
   '8C+',
   '9A',
 ];
+// fix needed for 0 index not showing with firestore

@@ -8,16 +8,6 @@ input:focus {
   outline: none;
 }
 
-.root,
-#root,
-#docs-root {
-  --primary: #ffffff;
-  --secondary: #f8f4e3;
-  --pale: #cdd1c4;
-  --blueish: #5c80bc;
-  --accent: #e8c547;
-}
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

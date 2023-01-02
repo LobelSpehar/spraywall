@@ -7,7 +7,7 @@ export function Profile({ user }: { user: User | null }) {
       className='h-full w-full pt-10 bg-no-repeat bg-cover bg-center'
       style={{ backgroundImage: `url(${profile})` }}
     >
-      my profile
+      my profile {user?.displayName}
     </section>
   );
 }

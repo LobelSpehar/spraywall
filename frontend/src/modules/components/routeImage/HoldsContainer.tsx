@@ -1,6 +1,6 @@
-import { DelHoldBtn } from 'modules/components/routeImage/DelHoldBtn';
-import { Hold } from 'modules/components/routeImage/Hold';
 import { HoldType } from 'modules/types';
+
+import { DelHoldBtn, Hold } from 'modules/components';
 
 export function HoldsContainer({
   route,

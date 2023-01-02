@@ -9,13 +9,17 @@ import {
   orderBy,
   query,
   startAfter,
+  updateDoc,
   where,
 } from 'firebase/firestore/lite';
 import { db } from 'firebaseInit';
-import { useNotifications } from 'modules/hooks/useNotifications';
-import { RouteType } from 'modules/types';
+
 import { useSetRecoilState } from 'recoil';
 import { gymAtom } from 'recoil/atoms/gymAtom';
+
+import { useNotifications } from 'modules/hooks';
+
+import { HoldType, RouteType } from 'modules/types';
 
 export function useFirestore() {
   const setRoutes = useSetRecoilState(gymAtom);
@@ -24,7 +28,7 @@ export function useFirestore() {
     setRoutes([]);
   };
 
-  const onAddRoute = async (data: any) => {
+  const onAddRoute = async (data: Omit<RouteType, 'id'>) => {
     var date = new Date();
 
     data.date =
@@ -32,8 +36,28 @@ export function useFirestore() {
     try {
       await addDoc(collection(db, 'routes'), data);
       infoMsg(data.name + ' created!');
-    } catch (error: any) {
-      errorMsg(error.errorMessage);
+    } catch (error) {
+      if (error instanceof Error) {
+        errorMsg(error.message);
+      }
+    }
+  };
+  const onUpdateRoute = async (
+    id: string,
+    data: {
+      route: Array<HoldType>;
+      name: string;
+      grade: number;
+    }
+  ) => {
+    try {
+      const docRef = doc(db, 'routes', id);
+      await updateDoc(docRef, data);
+      infoMsg(data.name + '  updated!');
+    } catch (error) {
+      if (error instanceof Error) {
+        errorMsg(error.message);
+      }
     }
   };
   const fetchRoutes = async (
@@ -68,8 +92,10 @@ export function useFirestore() {
         res.push(obj);
       });
       setRoutes(res);
-    } catch (error: any) {
-      errorMsg(error.errorMessage);
+    } catch (error) {
+      if (error instanceof Error) {
+        errorMsg(error.message);
+      }
     }
   };
 
@@ -83,8 +109,10 @@ export function useFirestore() {
       } else {
         errorMsg('No such document');
       }
-    } catch (error: any) {
-      errorMsg(error.errorMessage);
+    } catch (error) {
+      if (error instanceof Error) {
+        errorMsg(error.message);
+      }
     }
   };
 
@@ -93,8 +121,10 @@ export function useFirestore() {
       await deleteDoc(doc(db, 'routes', id));
 
       infoMsg('Route deleted!');
-    } catch (error: any) {
-      errorMsg(error.errorMessage);
+    } catch (error) {
+      if (error instanceof Error) {
+        errorMsg(error.message);
+      }
     }
     return null;
   };
@@ -104,5 +134,6 @@ export function useFirestore() {
     fetchRouteByID,
     clearRoutes,
     deleteRoute,
+    onUpdateRoute,
   };
 }

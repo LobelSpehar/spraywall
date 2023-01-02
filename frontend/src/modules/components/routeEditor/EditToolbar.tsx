@@ -1,7 +1,5 @@
+import { ToolBar, ToolBarRow, ToolBtn } from 'modules/components';
 import { foot, hand, save, start, top, undo } from 'assets/svg';
-import { ToolBar } from 'modules/components/toolBar/ToolBar';
-import { ToolBarRow } from 'modules/components/toolBar/ToolBarRow';
-import { ToolBtn } from 'modules/components/toolBar/ToolBtn';
 
 export function EditToolbar({
   setHoldColor,

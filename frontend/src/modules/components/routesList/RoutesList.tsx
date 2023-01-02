@@ -1,14 +1,13 @@
-import { ListItem } from 'modules/components/home/ListItem';
 import { RouteType } from 'modules/types';
+
+import { ListItem } from 'modules/components';
 
 export function RoutesList({
   routes,
   gradesRange,
-  refreshList,
 }: {
   routes: Array<RouteType>;
   gradesRange: Array<string>;
-  refreshList: Function;
 }) {
   return (
     <ul className='w-full max-h-[70vh] justify-center overflow-x-hidden overflow-y-auto'>
@@ -18,7 +17,6 @@ export function RoutesList({
             key={route.id}
             route={route}
             gradesRange={gradesRange}
-            refreshList={refreshList}
           ></ListItem>
         ))
       ) : (

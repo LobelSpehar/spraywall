@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+
 import {
   browserLocalPersistence,
   browserSessionPersistence,
@@ -11,7 +12,7 @@ import {
 } from 'firebase/auth';
 import { auth } from 'firebaseInit';
 
-import { useNotifications } from 'modules/hooks/useNotifications';
+import { useNotifications } from 'modules/hooks';
 
 export function useAuth() {
   const { errorMsg, infoMsg } = useNotifications();
@@ -37,8 +38,10 @@ export function useAuth() {
       await updateProfile(user, { displayName: username });
       infoMsg('Success, Welcome ' + username + '!');
       navigate('/');
-    } catch (error: any) {
-      errorMsg(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        errorMsg(error.message);
+      }
     }
   };
 
@@ -60,8 +63,10 @@ export function useAuth() {
       const user = await userCredential.user;
       navigate('/');
       infoMsg('Welcome back ' + user.displayName + '!');
-    } catch (error: any) {
-      errorMsg(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        errorMsg(error.message);
+      }
     }
   };
   const onLogOut = async () => {
@@ -69,8 +74,10 @@ export function useAuth() {
       const userCredential = await signOut(auth);
       navigate('/');
       infoMsg('Logged out, bye!');
-    } catch (error: any) {
-      errorMsg(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        errorMsg(error.message);
+      }
     }
   };
   const onReset = async (userEmail: string) => {
@@ -78,8 +85,10 @@ export function useAuth() {
       const userCredential = await sendPasswordResetEmail(auth, userEmail);
       navigate('/login');
       infoMsg('Email sent to ' + userEmail);
-    } catch (error: any) {
-      errorMsg(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        errorMsg(error.message);
+      }
     }
   };
 
